@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: hospital-readmission-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    envVars:
+      - key: ARTIFACTS_DIR
+        value: /app/artifacts
