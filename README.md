@@ -2,6 +2,8 @@
 
 A small ML service that scores a hospital encounter for 30-day readmission risk and serves the score over HTTP. It is trained on the UCI Diabetes 130-US Hospitals dataset (101,766 encounters from 1999 to 2008), compares three model families on a patient-grouped split, ships the winner behind a FastAPI app, and includes a drift check on the inputs. The trained artifacts are committed, so the API serves predictions as soon as it starts. It is a portfolio project that shows the full path from raw data to a served model. It is not for clinical use.
 
+Live demo: https://hospital-readmission-api-ec05.onrender.com (free tier, the first request after idle can take a minute)
+
 ## Problem
 
 About 11 percent of the encounters in this dataset end with the patient back in hospital inside 30 days. Those returns are expensive and often preventable, so a discharge team wants a short list of patients worth a second look: a follow-up call, a medication review, a sooner clinic visit. The catch is the imbalance. A model can look accurate by almost never raising its hand, and the first version of this one did exactly that. The interesting work here is not squeezing out AUC. It is measuring honestly, then picking a decision threshold that makes the flag worth having.
