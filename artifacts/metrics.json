@@ -1,0 +1,252 @@
+{
+  "model_version": "1.0.0",
+  "trained_at": "2026-10-15T06:08:03.682920+00:00",
+  "dataset": "UCI Diabetes 130-US Hospitals for Years 1999-2008",
+  "rows_raw": 101766,
+  "rows_after_cleaning": 99343,
+  "train_rows": 79541,
+  "test_rows": 19802,
+  "split": "GroupShuffleSplit by patient_nbr, test_size 0.2, random_state 42",
+  "features": [
+    "age_midpoint",
+    "time_in_hospital",
+    "num_lab_procedures",
+    "num_procedures",
+    "num_medications",
+    "number_outpatient",
+    "number_emergency",
+    "number_inpatient",
+    "number_diagnoses",
+    "service_utilization",
+    "race",
+    "gender",
+    "admission_type_id",
+    "discharge_disposition_id",
+    "admission_source_id",
+    "diag_1_group",
+    "diag_2_group",
+    "diag_3_group",
+    "change",
+    "diabetesMed",
+    "metformin",
+    "repaglinide",
+    "nateglinide",
+    "glimepiride",
+    "glipizide",
+    "glyburide",
+    "pioglitazone",
+    "rosiglitazone",
+    "insulin",
+    "glyburide-metformin"
+  ],
+  "numeric_features": [
+    "age_midpoint",
+    "time_in_hospital",
+    "num_lab_procedures",
+    "num_procedures",
+    "num_medications",
+    "number_outpatient",
+    "number_emergency",
+    "number_inpatient",
+    "number_diagnoses",
+    "service_utilization"
+  ],
+  "categorical_features": [
+    "race",
+    "gender",
+    "admission_type_id",
+    "discharge_disposition_id",
+    "admission_source_id",
+    "diag_1_group",
+    "diag_2_group",
+    "diag_3_group",
+    "change",
+    "diabetesMed",
+    "metformin",
+    "repaglinide",
+    "nateglinide",
+    "glimepiride",
+    "glipizide",
+    "glyburide",
+    "pioglitazone",
+    "rosiglitazone",
+    "insulin",
+    "glyburide-metformin"
+  ],
+  "medication_features": [
+    "metformin",
+    "repaglinide",
+    "nateglinide",
+    "glimepiride",
+    "glipizide",
+    "glyburide",
+    "pioglitazone",
+    "rosiglitazone",
+    "insulin",
+    "glyburide-metformin"
+  ],
+  "models": {
+    "logistic_regression": {
+      "roc_auc": 0.667,
+      "accuracy": 0.6769,
+      "precision": 0.1824,
+      "recall": 0.542,
+      "f1": 0.273,
+      "confusion_matrix": {
+        "tn": 12203,
+        "fp": 5383,
+        "fn": 1015,
+        "tp": 1201
+      },
+      "positive_rate": 0.1119
+    },
+    "hist_gradient_boosting": {
+      "roc_auc": 0.6685,
+      "accuracy": 0.8885,
+      "precision": 0.5513,
+      "recall": 0.0194,
+      "f1": 0.0375,
+      "confusion_matrix": {
+        "tn": 17551,
+        "fp": 35,
+        "fn": 2173,
+        "tp": 43
+      },
+      "positive_rate": 0.1119
+    },
+    "lightgbm": {
+      "roc_auc": 0.67,
+      "accuracy": 0.889,
+      "precision": 0.5842,
+      "recall": 0.0266,
+      "f1": 0.0509,
+      "confusion_matrix": {
+        "tn": 17544,
+        "fp": 42,
+        "fn": 2157,
+        "tp": 59
+      },
+      "positive_rate": 0.1119
+    }
+  },
+  "selected_model": "lightgbm",
+  "selected_metrics": {
+    "roc_auc": 0.67,
+    "accuracy": 0.889,
+    "precision": 0.5842,
+    "recall": 0.0266,
+    "f1": 0.0509,
+    "confusion_matrix": {
+      "tn": 17544,
+      "fp": 42,
+      "fn": 2157,
+      "tp": 59
+    },
+    "positive_rate": 0.1119
+  },
+  "decision_threshold": 0.13,
+  "threshold_analysis": {
+    "target_recall": 0.5,
+    "tuned_threshold": 0.13,
+    "validation_rows": 15734,
+    "validation_recall_at_tuned_threshold": 0.4972,
+    "test_results": {
+      "0.3": {
+        "threshold": 0.3,
+        "accuracy": 0.8826,
+        "precision": 0.4036,
+        "recall": 0.102,
+        "f1": 0.1628,
+        "confusion_matrix": {
+          "tn": 17252,
+          "fp": 334,
+          "fn": 1990,
+          "tp": 226
+        },
+        "positive_rate": 0.1119
+      },
+      "0.5": {
+        "threshold": 0.5,
+        "accuracy": 0.889,
+        "precision": 0.5842,
+        "recall": 0.0266,
+        "f1": 0.0509,
+        "confusion_matrix": {
+          "tn": 17544,
+          "fp": 42,
+          "fn": 2157,
+          "tp": 59
+        },
+        "positive_rate": 0.1119
+      },
+      "tuned": {
+        "threshold": 0.13,
+        "accuracy": 0.7096,
+        "precision": 0.1925,
+        "recall": 0.4991,
+        "f1": 0.2778,
+        "confusion_matrix": {
+          "tn": 12946,
+          "fp": 4640,
+          "fn": 1110,
+          "tp": 1106
+        },
+        "positive_rate": 0.1119
+      }
+    },
+    "method": "Tuned threshold picked on a patient-grouped validation slice (20 percent) of the training rows, targeting recall 0.5, using a clone of the winner fitted without the validation rows. All reported threshold metrics are measured on the held-out test patients."
+  },
+  "top_features": [
+    {
+      "feature": "num__number_inpatient",
+      "score": 0.0491,
+      "method": "permutation importance (roc_auc drop)"
+    },
+    {
+      "feature": "cat__race_Hispanic",
+      "score": 0.044,
+      "method": "permutation importance (roc_auc drop)"
+    },
+    {
+      "feature": "cat__race_Unknown",
+      "score": 0.0098,
+      "method": "permutation importance (roc_auc drop)"
+    },
+    {
+      "feature": "num__time_in_hospital",
+      "score": 0.0093,
+      "method": "permutation importance (roc_auc drop)"
+    },
+    {
+      "feature": "num__service_utilization",
+      "score": 0.0073,
+      "method": "permutation importance (roc_auc drop)"
+    },
+    {
+      "feature": "cat__gender_Female",
+      "score": 0.0064,
+      "method": "permutation importance (roc_auc drop)"
+    },
+    {
+      "feature": "num__age_midpoint",
+      "score": 0.0041,
+      "method": "permutation importance (roc_auc drop)"
+    },
+    {
+      "feature": "num__number_diagnoses",
+      "score": 0.004,
+      "method": "permutation importance (roc_auc drop)"
+    },
+    {
+      "feature": "num__num_medications",
+      "score": 0.0034,
+      "method": "permutation importance (roc_auc drop)"
+    },
+    {
+      "feature": "num__num_procedures",
+      "score": 0.0027,
+      "method": "permutation importance (roc_auc drop)"
+    }
+  ],
+  "intended_use": "Portfolio demonstration of an ML serving pipeline. Not for clinical use."
+}
