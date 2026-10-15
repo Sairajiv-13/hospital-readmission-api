@@ -27,3 +27,23 @@ jobs:
         run: ruff check src tests
       - name: Test
         run: pytest
+
+  container:
+    # Build the image and prove the app actually starts inside it.
+    # Unit tests run on the host, where system libraries differ; this
+    # job exists because a missing libgomp once crashed the deploy
+    # while every test was green.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t readmission-api:ci .
+      - name: Start container and check health
+        run: |
+          docker run -d --name api -p 8000:8000 readmission-api:ci
+          for i in $(seq 1 30); do
+            if curl -fs http://localhost:8000/healthz; then exit 0; fi
+            sleep 2
+          done
+          docker logs api
+          exit 1
